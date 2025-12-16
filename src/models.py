@@ -1,8 +1,6 @@
-# models.py
 from enum import Enum
 from dataclasses import dataclass
 from typing import Literal
-from datetime import datetime
 
 
 class ExamState(Enum):

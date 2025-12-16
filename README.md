@@ -1,68 +1,81 @@
-# AI Examiner Agent
+# AI Examiner
 
-AI Examiner Agent is an interactive LLM-based examiner that conducts oral exams in Ukrainian, asks questions on various topics, and evaluates student answers in real time.
-
-The project uses **Gradio** for the UI and **Groq API** to work with the LLM.
-
----
+Interactive oral examination system powered by Google Vertex AI.
 
 ## Features
 
-- Dynamic questions on topics:
-  - Python basics
-  - OOP
-  - Data structures
-  - SQL
-- Automatic answer evaluation
-- Final score and aggregated feedback
-- Clear separation of responsibilities:
-  - UI
-  - Controller (exam logic)
-  - LLM agent
-  - Storage (data)
+- Automated oral examination in Ukrainian
+- AI-powered answer evaluation
+- Cloud storage with Firestore
+- Real-time scoring and feedback
 
----
+## Tech Stack
 
-## Environment Setup and Running
+- **UI**: Gradio
+- **LLM**: Google Vertex AI Gemini
+- **Database**: Google Cloud Firestore
+- **Language**: Python 3.11+
 
-### Create a virtual environment
-```
-uv venv
-```
+## Setup
 
-### Activate the environment
+### Prerequisites
 
-Linux / macOS:
-```
-source .venv/bin/activate
-```
-Windows:
-```
-.venv\Scripts\activate
+1. Google Cloud Project with Vertex AI and Firestore enabled
+2. API key from GCP Console
+3. Python 3.11+
+
+### Installation
+
+```bash
+uv sync
 ```
 
-### Install dependencies
+### Configuration
 
-```
-uv pip install .
+Create `.env` file:
+
+```bash
+GCP_PROJECT_ID=your-project-id
+VERTEX_AI_API_KEY=your-api-key
+MODEL_NAME=gemini-2.0-flash-lite
 ```
 
-### Run the application
+### Create Firestore Database
 
-```
+1. Open Firestore Console
+2. Create Database in Native mode
+3. Select region: europe-west1
+
+## Usage
+
+```bash
 python app.py
 ```
-After launching, Gradio will display a local URL, for example:
-```
-http://127.0.0.1:7860
-```
-Open it in your browser.
 
-### Test Students
+Open http://localhost:7860 in your browser.
 
-For demonstration purposes, `storage.py` includes the following test students:
+## Project Structure
+
 ```
-alice@example.com / Alice
-bob@example.com / Bob
+├── app.py
+└── src/
+    ├── llm_agent.py          # Vertex AI integration
+    ├── exam_controller.py    # Exam flow
+    ├── exam_functions.py     # Exam operations
+    ├── firestore_storage.py  # Database layer
+    ├── models.py             # Data models
+    └── config.py             # Configuration
 ```
-Use these credentials to start the exam.
+
+## Database Schema
+
+**students**: email, name, created_at
+
+**exams**: exam_id, student_email, student_name, topics, score, status, started_at, finished_at
+
+**messages**: message_id, exam_id, role, content, type, timestamp
+
+## License
+
+MIT
+

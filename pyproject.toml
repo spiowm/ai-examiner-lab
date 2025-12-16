@@ -5,7 +5,9 @@ description = "AI Examiner Agent (LLM-based exam bot)"
 requires-python = ">=3.11"
 dependencies = [
     "gradio>=6.1.0",
-    "groq>=0.37.1",
+    "google-cloud-aiplatform>=1.38.0",
+    "google-cloud-firestore>=2.14.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [tool.uv]
